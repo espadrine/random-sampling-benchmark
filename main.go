@@ -1,11 +1,9 @@
 package main
 
 import (
-	"fmt"
 	"math"
 	"math/big"
 	"crypto/rand"
-	"time"
 )
 
 var sampleMaxCache = make(map[int]map[int]int64)
@@ -63,27 +61,4 @@ func rawSample(base int, size int) string {
 		s += string(n.String())
 	}
 	return s
-}
-
-func timed(f func()) time.Duration {
-	start := time.Now()
-	f()
-	return time.Since(start)
-}
-
-func benchmark(n int, f func()) {
-	fmt.Println(timed(func () {
-		for i := 0; i < n; i++ {
-			f()
-		}
-	}))
-}
-
-func main() {
-	tries := 100000
-	base := 10
-	size := 11
-	//sampleMax(base, size)
-	benchmark(tries, func () { rawSample(base, size) })
-	benchmark(tries, func () { sample(base, size) })
 }
